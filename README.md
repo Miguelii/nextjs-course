@@ -1,1 +1,3 @@
-This is a starter template for [Learn Next.js](https://nextjs.org/learn).
+This is a starter template for [Next.js & React Course](https://www.udemy.com/course/nextjs-react-the-complete-guide).
+
+Each branch represents a section of the course.
