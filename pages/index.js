@@ -1,19 +1,16 @@
 import Link from 'next/link'
+import {getAllEvents} from '../dummy-data'
+import EventList from '../components/events/event-list';
 
 function HomePage() {
+
+    const getFeature = getAllEvents();
+    
     return (
         <div>
-            <h1> Home page</h1>
-            <ul>
-                <li>
-                    <Link href="/portfolio"> Portefolio </Link>
-                </li>
-                <li>
-                    <Link href="/clients"> Clients </Link>
-                </li>
-            </ul>
+            <EventList items={getFeature} />
         </div>
-    )
+    );
 }
 
 export default HomePage;
