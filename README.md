@@ -4,4 +4,8 @@ Each branch represents a section of the course.
 
 # Setup
 
-`npm run dev` - Run on development server
+`npm run dev` - Start development server
+
+`npm run build` - Build project for production server
+
+`npm start` - Start production server
