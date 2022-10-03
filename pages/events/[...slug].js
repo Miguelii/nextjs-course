@@ -6,6 +6,7 @@ import ResultsTitle from '../../components/events/results-title';
 import Button from '../../components/ui/button'
 import ErrorAlert from '../../components/ui/error-alert'
 import useSWR from 'swr';
+import Head from 'next/head'
 
 //Client side data fetching, server side redering example in txt file
 
@@ -30,21 +31,47 @@ function FilteredEventsPage(props) {
     
           setLoadedEvents(events);
         }
-      }, [data]);
+    }, [data]);
+    
+    let pageHeadData = (
+        <Head>
+            <title>Filtered Events</title>
+            <meta 
+                name= "Description" 
+                content= {`A list of filtered events`}
+            />
+        </Head>
+    )
 
     if(!loadedEvents) {
-        return <p className='center'>Loading...</p>
+        return (
+            <Fragment>
+                {pageHeadData}
+                <p className='center'>Loading...</p>
+            </Fragment>
+        );
     }
-
+    
     const FilteredYear = filterData[0];
     const FilteredMonth = filterData[1];
 
     const numYear = +FilteredYear;
     const numMonth = +FilteredMonth;
-    
+
+    pageHeadData = (
+        <Head>
+            <title>Filtered Events</title>
+            <meta 
+                name= "Description" 
+                content= {`All Events for ${numMonth}/${numYear}.`}
+            />
+        </Head>
+    )
+
     if(isNaN(numYear) || isNaN(numMonth) || numYear > 2030 || numYear < 2021 || numMonth < 1 || numMonth > 12 || error) {
         return (
             <Fragment>
+                {pageHeadData}
                 <ErrorAlert>
                     <p>Invalid filter. Please adjust your values!</p>
                 </ErrorAlert>
@@ -65,6 +92,7 @@ function FilteredEventsPage(props) {
     if(!filteredEvents || filteredEvents.length == 0) {
         return (
             <Fragment>
+                {pageHeadData}
                 <div className='center'>
                     <p>No events found</p>
                     <Button link='/events'>Show All Events</Button>
@@ -77,6 +105,7 @@ function FilteredEventsPage(props) {
 
     return (
         <Fragment>
+            {pageHeadData}
             <ResultsTitle date={date}/>
             <EventList items={filteredEvents}/>
         </Fragment>
