@@ -1,18 +1,21 @@
-import Link from "next/link";
-import styles from '../../styles/button.module.css'
+import Link from 'next/link';
 
-function button(props) {
+import classes from './button.module.css';
 
-    if (props.link) {
-        return (
-            <Link href={props.link}>
-                <a className={styles.btn}>{props.children}</a>
-            </Link>
-        );
-    }
+function Button(props) {
+  if (props.link) {
+    return (
+      <Link href={props.link}>
+        <a className={classes.btn}>{props.children}</a>
+      </Link>
+    );
+  }
 
-    return <button className={styles.btn} onClick={props.onClick}>{props.children}</button>
-    
+  return (
+    <button className={classes.btn} onClick={props.onClick}>
+      {props.children}
+    </button>
+  );
 }
 
-export default button;
+export default Button;
